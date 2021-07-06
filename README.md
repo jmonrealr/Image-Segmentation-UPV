@@ -1,1 +1,2 @@
 # Image-Segmentation-UPV
+La problemática a resolver consiste en desarrollar una aplicación móvil que permita al usuario final tomar una fotografía con su dispositivo, esta fotografía sera procesada por medio del algoritmo de agrupación K-Means y posteriormente se devolverá la imagen segmentada, ofreciendo también la posibilidad de almacenarla en el dispositivo.  
