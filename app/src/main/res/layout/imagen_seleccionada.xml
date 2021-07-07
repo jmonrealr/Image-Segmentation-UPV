@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+                                                   android:layout_height="match_parent">
+
+    <Button
+            android:text="Regresar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/btnRegresar" tools:layout_editor_absoluteY="682dp"
+            tools:layout_editor_absoluteX="111dp" app:icon="@android:drawable/ic_menu_revert"
+            android:textColor="#C14C4C4C" app:iconTint="#C14C4C4C" android:background="false"
+            tools:ignore="MissingConstraints"/>
+    <Button
+            android:text="Continuar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/btnContinuar" tools:layout_editor_absoluteY="682dp"
+            tools:layout_editor_absoluteX="261dp" app:icon="@android:drawable/ic_menu_send"
+            tools:ignore="MissingConstraints"/>
+    <ImageView
+            android:layout_width="411dp"
+            android:layout_height="540dp" tools:srcCompat="@tools:sample/backgrounds/scenic"
+            android:id="@+id/imageView3" tools:layout_editor_absoluteY="109dp" tools:layout_editor_absoluteX="0dp"
+            tools:ignore="MissingConstraints"/>
+    <TextView
+            android:text="Imagen Seleccionada"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView3" tools:layout_editor_absoluteY="43dp"
+            tools:layout_editor_absoluteX="31dp" android:textSize="24sp" android:textColor="#2E2D2D"
+            tools:ignore="MissingConstraints"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

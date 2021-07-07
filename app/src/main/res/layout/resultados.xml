@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+                                                   android:layout_height="match_parent">
+
+    <TextView
+            android:text="Entrada"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView4" tools:layout_editor_absoluteY="46dp"
+            tools:layout_editor_absoluteX="32dp" android:textSize="18sp" android:textColor="#2A2A2A"
+            tools:ignore="MissingConstraints"/>
+    <TextView
+            android:text="Ground truth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView5" tools:layout_editor_absoluteY="258dp"
+            tools:layout_editor_absoluteX="32dp" android:textSize="18sp" android:textColor="#2A2A2A"
+            tools:ignore="MissingConstraints"/>
+    <TextView
+            android:text="Predicción"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView6" tools:layout_editor_absoluteY="464dp"
+            tools:layout_editor_absoluteX="32dp" android:textSize="18sp" android:textColor="#2A2A2A"
+            tools:ignore="MissingConstraints"/>
+    <ImageView
+            android:layout_width="306dp"
+            android:layout_height="166dp" tools:srcCompat="@tools:sample/backgrounds/scenic"
+            android:id="@+id/imgInput" tools:layout_editor_absoluteY="70dp" tools:layout_editor_absoluteX="52dp"
+            tools:ignore="MissingConstraints"/>
+    <ImageView
+            android:layout_width="306dp"
+            android:layout_height="166dp" tools:srcCompat="@tools:sample/backgrounds/scenic"
+            android:id="@+id/imgGround" tools:layout_editor_absoluteY="282dp" tools:layout_editor_absoluteX="52dp"
+            tools:ignore="MissingConstraints"/>
+    <ImageView
+            android:layout_width="306dp"
+            android:layout_height="166dp" tools:srcCompat="@tools:sample/backgrounds/scenic"
+            android:id="@+id/imgPrediccion" tools:layout_editor_absoluteY="488dp" tools:layout_editor_absoluteX="52dp"
+            tools:ignore="MissingConstraints"/>
+    <Button
+            android:text="Guardar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/btnGuardar" tools:layout_editor_absoluteY="682dp"
+            tools:layout_editor_absoluteX="273dp" app:icon="@android:drawable/ic_menu_save"
+            tools:ignore="MissingConstraints" app:iconTint="#FFFFFF"/>
+    <Button
+            android:text="Regresar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/btnRegresar" tools:layout_editor_absoluteY="682dp"
+            tools:layout_editor_absoluteX="123dp" app:icon="@android:drawable/ic_menu_revert"
+            android:textColor="#C14C4C4C" app:iconTint="#C14C4C4C" android:background="false"
+            tools:ignore="MissingConstraints"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
