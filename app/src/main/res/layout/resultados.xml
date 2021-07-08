@@ -47,6 +47,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/btnRegresar" tools:layout_editor_absoluteY="682dp"
             tools:layout_editor_absoluteX="123dp" app:icon="@android:drawable/ic_menu_revert"
-            android:textColor="#C14C4C4C" app:iconTint="#C14C4C4C" android:background="false"
+            android:textColor="#C14C4C4C" app:iconTint="#C14C4C4C" android:background="#00FFFFFF"
             tools:ignore="MissingConstraints"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
