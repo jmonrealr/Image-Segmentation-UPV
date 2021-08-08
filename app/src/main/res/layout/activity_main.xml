@@ -6,43 +6,49 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity" android:layout_gravity="center">
-    <Button
-            android:text="@string/btnFoto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/btnFoto" tools:layout_editor_absoluteY="339dp"
-            tools:layout_editor_absoluteX="32dp" app:icon="@android:drawable/ic_menu_camera"
-            android:background="#4F000000" android:textColor="#0B0A0A" app:iconTint="#000000"
-            tools:ignore="MissingConstraints" android:translationY="1300px" android:translationX="85px"
-            android:gravity="center|center_vertical"
-            android:onClick="tomarFoto"/>
-    <Button
-            android:text="@string/btnCargar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/btnImagen" tools:layout_editor_absoluteY="339dp"
-            tools:layout_editor_absoluteX="211dp" app:icon="@android:drawable/ic_menu_gallery"
-            android:background="#4F000000" android:textColor="#0B0A0A" app:iconTint="#000000"
-            tools:ignore="MissingConstraints" android:translationY="1300px" android:translationX="340px"
-            android:gravity="center_horizontal|center_vertical"/>
+    <TextView
+            android:text="@string/txtTitulo"
+            android:layout_width="346dp"
+            android:layout_height="36dp" android:id="@+id/textView2"
+            android:fontFamily="sans-serif-black" android:textSize="20sp"
+            tools:ignore="MissingConstraints"
+            android:translationY="150sp" android:textAlignment="center"
+            android:gravity="center" android:translationX="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="28dp" app:layout_constraintHorizontal_bias="0.253"/>
     <TextView
             android:text="@string/txtMensaje"
-            android:layout_width="409dp"
+            android:layout_width="346dp"
             android:layout_height="67dp" android:id="@+id/textView"
             android:fontFamily="sans-serif" android:textSize="14sp"
             android:textAlignment="center" tools:ignore="MissingConstraints"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.308"
-            android:gravity="center|center_vertical" android:translationX="50px"/>
-    <TextView
-            android:text="@string/txtTitulo"
-            android:layout_width="409dp"
-            android:layout_height="wrap_content" android:id="@+id/textView2"
-            android:fontFamily="sans-serif-black" android:textSize="20sp"
-            tools:ignore="MissingConstraints" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.0" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toTopOf="@+id/btnFoto"
-            app:layout_constraintVertical_bias="0.0" android:translationY="150sp" android:textAlignment="center"
-            android:gravity="center" android:translationX="50px"/>
+            android:gravity="center|center_vertical" android:translationX="12sp" tools:layout_editor_absoluteY="56dp"
+            android:layout_marginEnd="16dp" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView2" app:layout_constraintHorizontal_bias="0.0"/>
+    <Button
+            android:text="@string/btnCargar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/btnImagen"
+            app:icon="@android:drawable/ic_menu_gallery"
+            android:background="#4F000000" android:textColor="#0B0A0A" app:iconTint="#000000"
+            tools:ignore="MissingConstraints" android:translationY="40sp" android:translationX="10sp"
+            android:gravity="center_horizontal|center_vertical"
+            android:onClick="seleccionarImg" app:layout_row="2" app:layout_column="1"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="196dp"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="72dp"/>
+    <Button
+            android:text="@string/btnFoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/btnFoto"
+            app:icon="@android:drawable/ic_menu_camera"
+            android:background="#4F000000" android:textColor="#0B0A0A" app:iconTint="#000000"
+            tools:ignore="MissingConstraints" android:translationY="40sp" android:translationX="2sp"
+            android:gravity="center|center_vertical"
+            android:onClick="tomarFoto" app:layout_row="2" app:layout_column="0"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="72dp"/>
     <!--<ImageView
             android:layout_width="170dp"
             android:layout_height="116dp"
