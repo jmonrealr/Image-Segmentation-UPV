@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * Muesta una vista previa de la imagen cargada
+ */
 public class VisualizarFoto extends AppCompatActivity {
 
     private static int origen;
@@ -19,15 +22,28 @@ public class VisualizarFoto extends AppCompatActivity {
     private static Uri path;
     public static Bitmap imgRecibida = null;
 
+    /**
+     * Almacena la fotografia en esta actividad
+     * @param img Fotografia
+     */
     public static void setImgRecibida(Bitmap img){
         imgRecibida = img;
         origen = TOMAR_FOTO;
     }
+
+    /**
+     * Almacena la ruta de la imagen en esta actividad
+     * @param p Path de imagen
+     */
     public static void setImgSeleccionada(Uri p){
         path = p;
         origen = SELECCIONAR_FOTO;
     }
 
+    /**
+     * Carga la imagen/fotografia en un ImageView
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -41,6 +57,10 @@ public class VisualizarFoto extends AppCompatActivity {
         }
     }
 
+    /**
+     * Permite continuar con el flujo de la aplicación o volver para seleccionar otra imagen
+     * @param view
+     */
     public void onClick(View view){
         Intent cambiarVista = null;
 

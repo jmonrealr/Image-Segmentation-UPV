@@ -8,19 +8,37 @@ import android.view.View;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * Muestra la imagen segmentada por KMeans
+ */
 public class Resultados extends AppCompatActivity {
 
     private ImageView imgInput;
     private static Uri path;
     private static Bitmap imgRecibida = null;
 
+    /**
+     * Almacena la fotografia en esta actividad
+     * @param img Fotografia
+     */
     public static void setImgRecibida(Bitmap img){
         imgRecibida = img;
     }
+
+    /**
+     * Almacena la ruta de la imagen en esta actividad
+     * @param p Path de imagen
+     */
     public static void setImgSeleccionada(Uri p){
         path = p;
     }
 
+    /**
+     * Carga la imagen/fotografia en un ImageView
+     * Carga la imagen preprocesada en un ImageView
+     * Carga la imagen segmentada por KMeans en un ImageView
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -34,6 +52,10 @@ public class Resultados extends AppCompatActivity {
         }
     }
 
+    /**
+     * Permite almacenar la imagen segmentada y volver al inicio de la aplicación
+     * @param view
+     */
     public void onClick(View view){
         Intent cambiarVista = null;
 
@@ -45,9 +67,9 @@ public class Resultados extends AppCompatActivity {
                 startActivity(cambiarVista);
                 break;
             case R.id.btnSiguiente:
+                //Aqui va el codigo para almacenar la imagen
                 //cambiarVista = new Intent(VisualizarFoto.this, Resultados.class);
                 break;
         }
-        //startActivity(cambiarVista);
     }
 }
