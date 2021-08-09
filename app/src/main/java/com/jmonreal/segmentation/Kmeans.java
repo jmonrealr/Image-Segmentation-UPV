@@ -60,13 +60,19 @@ public class Kmeans {
     void compute(){
         System.out.println(System.getProperty("user.dir"));
         String directory = System.getProperty("user.dir");
-        Mat image = Imgcodecs.imread(this.image.toString());
-        //rearrange data into a long vertical strip (to float, reshape channels into columns)
-        image.convertTo(image, CvType.CV_32F);
-        Mat data = image.reshape(1, (int) image.total());
+        Mat data = null;
+        Mat image = null;
+        try {
+            image = Imgcodecs.imread(this.image.toString());
+            //rearrange data into a long vertical strip (to float, reshape channels into columns)
+            image.convertTo(image, CvType.CV_32F);
+            data = image.reshape(1, (int) image.total());
+        }catch (NullPointerException ex){
+            ex.printStackTrace();
+        }
         if (!image.empty()){
             Mat label = new Mat();
-            TermCriteria criteria = new TermCriteria();
+            TermCriteria criteria = new TermCriteria(TermCriteria.EPS + TermCriteria.MAX_ITER, 50, 0.2);
             int attempts = 5;
             int flags = Core.KMEANS_PP_CENTERS;
             Mat centers = new Mat();
@@ -79,6 +85,10 @@ public class Kmeans {
                 Mat col = colors.row(i);
                 double d[] = col.get(0, 0);
                 draw.setTo(new Scalar(d[0], d[1], d[2]), mask);
+                Mat tempImage = draw;
+                tempImage = tempImage.reshape(3, image.rows());
+                tempImage.convertTo(tempImage, CvType.CV_8U);
+                Imgcodecs.imwrite(directory + "testing_" + i + ".jpg", tempImage);
 
             }
             draw = draw.reshape(3, image.rows());
