@@ -89,33 +89,42 @@ public class Kmeans {
         this.image.invalidate();
         BitmapDrawable drawable = (BitmapDrawable) this.image.getDrawable();
         Bitmap btm = drawable.getBitmap();
-        Mat imagef = new Mat (btm.getHeight(), btm.getWidth(), CvType.CV_32F);
+        Mat imagef = new Mat (btm.getHeight(),  btm.getWidth(), CvType.CV_8UC3);
 
         /*Mat imagef = new Mat();
         Bitmap bmp32 = btm.copy(Bitmap.Config.ARGB_8888, true);
         Utils.bitmapToMat(bmp32, imagef);*/
-
-
+        System.out.println(  "image base"+ imagef);
+        imagef.convertTo(imagef, CvType.CV_32F);
         Mat data = imagef.reshape(1, (int) imagef.total());
+        System.out.println(data);
         if (!imagef.empty()){
             Mat label = new Mat();
-            TermCriteria criteria = new TermCriteria();
+            //TermCriteria criteria = new TermCriteria();
+            TermCriteria criteria = new TermCriteria(TermCriteria.EPS + TermCriteria.MAX_ITER, 50, 0.2);
             int attempts = 5;
             int flags = Core.KMEANS_PP_CENTERS;
             Mat centers = new Mat();
             double compactness = Core.kmeans(data, this.K, label, criteria, attempts, flags, centers);
             /*Mat*/ draw = new Mat( (int) imagef.total(), 1, CvType.CV_32FC3);
-            //Mat colors = centers.reshape(3, this.K);
+            System.out.println(centers.toString());
+            Mat colors = centers.reshape(3, K);
             for (int i = 0; i < K; i++) {
                 Mat mask = new Mat(); // mas for each cluster label
                 Core.compare(label, new Scalar(i), mask, Core.CMP_EQ);
-                //Mat col = colors.row(i);
-                //double d[] = col.get(0, 0);
-                //draw.setTo(new Scalar(d[0], d[1], d[2]), mask);
-
+                Mat col = colors.row(i);
+                double d[] = col.get(0, 0);
+                draw.setTo(new Scalar(d[0], d[1], d[2]), mask);
+                Mat draw2 = draw;
+                draw2 = draw.reshape(3, imagef.rows());
+                draw2.convertTo(draw2, CvType.CV_8UC3);
+                Imgcodecs.imwrite(directory + "testing_" + i + ".jpg", draw2);
             }
             draw = draw.reshape(3, imagef.rows());
-            draw.convertTo(draw, CvType.CV_8U);
+            draw.convertTo(draw, CvType.CV_8UC3);
+            System.out.println(draw);
+            Imgcodecs.imwrite("final.jpg", draw);
+            System.out.println(Imgcodecs.class.getResource("/"));
             Imgcodecs.imwrite(directory + "final" + ".jpg", draw);
             System.out.println("======Salida: "+directory + "final" + ".jpg");
         }else {

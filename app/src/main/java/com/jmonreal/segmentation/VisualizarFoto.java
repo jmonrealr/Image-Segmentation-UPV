@@ -95,10 +95,11 @@ public class VisualizarFoto extends AppCompatActivity {
         Mat resultado = km.compute();
         //Convirtiendo a bitmap
         Bitmap bmp = null;
-
-        Bitmap bm = Bitmap.createBitmap(resultado.cols(), resultado.rows(),Bitmap.Config.ARGB_8888);
+        System.out.println("resultado " + resultado);
+        Bitmap bm = Bitmap.createBitmap(resultado.cols(), resultado.rows(),Bitmap.Config.RGB_565);
         Utils.matToBitmap(resultado, bm);
-
+        System.out.println("bitmap " + bm);
+        System.out.println("get something" + bm.getColorSpace());
         Resultados.setResultado(bm);
 
 

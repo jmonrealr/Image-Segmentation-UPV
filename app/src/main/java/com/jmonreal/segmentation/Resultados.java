@@ -57,12 +57,14 @@ public class Resultados extends AppCompatActivity {
         imgInput = findViewById(R.id.imgInput);
         if(imgRecibida != null) {
             imgInput.setImageBitmap(imgRecibida);
+            imgInput.refreshDrawableState();
         }
         else{
             imgInput.setImageURI(path);
         }
         imgPrediccion = findViewById(R.id.imgPrediccion);
         imgPrediccion.setImageBitmap(resultado);
+        imgPrediccion.refreshDrawableState();
     }
 
     /**
@@ -80,7 +82,9 @@ public class Resultados extends AppCompatActivity {
                 startActivity(cambiarVista);
                 break;
             case R.id.btnSiguiente:
-                //Aqui va el codigo para almacenar la imagen
+                imgPrediccion.setImageBitmap(imgRecibida);
+                //imgPrediccion.setImageBitmap(resultado);
+                imgPrediccion.refreshDrawableState();
                 break;
         }
     }
