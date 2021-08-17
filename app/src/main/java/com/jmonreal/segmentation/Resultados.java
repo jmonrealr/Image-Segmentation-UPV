@@ -114,64 +114,17 @@ public class Resultados extends AppCompatActivity {
                 break;
             case R.id.btnGuardar:
 
-                imgPrediccion.setImageBitmap(imgRecibida);
-                imgPrediccion.refreshDrawableState();
+                /*imgPrediccion.setImageBitmap(imgRecibida);
+                imgPrediccion.refreshDrawableState();*/
                 saveToGallery(resultado);
-                //grabar();
 
-                //saveToInternalStorage(resultado);
                 break;
         }
     }
 
+    private void saveToGallery(Bitmap bmp){
 
-
-/*    public void grabar() throws IOException {
-        File filepath = Environment.getExternalStorageDirectory();
-        File dir = new File(filepath.getAbsolutePath());
-        System.out.println("ruta: "+filepath.getAbsolutePath());
-
-        File file = new File(dir, System.currentTimeMillis()+".jpg");
-        System.out.println("Nombre: "+System.currentTimeMillis()+".jpg");
-
-        try{
-            outStream = new FileOutputStream(file);
-        }catch(FileNotFoundException e){
-            e.printStackTrace();
-        }
-        this.imgRecibida.compress(Bitmap.CompressFormat.JPEG, 100, outStream);
-        outStream.flush();
-        outStream.close();
-    }*/
-
-    private String saveToInternalStorage(Bitmap bitmapImage){
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        // path to /data/data/yourapp/app_data/imageDir
-        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-
-        // Create imageDir
-        File mypath=new File(directory,System.currentTimeMillis()+".jpg");
-
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(mypath);
-            // Use the compress method on the BitMap object to write image to the OutputStream
-            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
-            System.out.println("GUARDADO: " +mypath);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return directory.getAbsolutePath();
-    }
-
-
-    private void saveToGallery(Bitmap bitmapImage){
+        Bitmap bitmapImage = bmp.copy(bmp.getConfig(), true);
 
         FileOutputStream outputStream = null;
         File file = Environment.getExternalStorageDirectory();
