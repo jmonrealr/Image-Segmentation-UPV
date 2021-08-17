@@ -80,6 +80,7 @@ public class Kmeans {
         //Mat imagef = Imgcodecs.imread(this.image.toString()); //Aca uso el imageView pero no jala
         //Mat imagef = Imgcodecs.imread(this.bitmap.toString());
         //Mat imagef = Imgcodecs.imread(this.path.getPath()); //Aca uso el path pero no jala
+        //Mat imagef = Imgcodecs.imread(this.path.getPath()); //Aca uso el path pero no jala
         //System.out.println("Imagen seleccionada: "+ this.path.getPath());
         //rearrange data into a long vertical strip (to float, reshape channels into columns)
         //imagef.convertTo(imagef, CvType.CV_32F);
