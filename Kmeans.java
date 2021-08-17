@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.util.Log;
 import android.widget.ImageView;
 import org.opencv.android.OpenCVLoader;
+import org.opencv.android.Utils;
 import org.opencv.core.*;
 import org.opencv.imgcodecs.Imgcodecs;
 
@@ -71,12 +72,21 @@ public class Kmeans {
     void compute(){
         System.out.println(System.getProperty("user.dir"));
         String directory = System.getProperty("user.dir");
-        Mat imagef = Imgcodecs.imread(this.image.toString()); //Aca uso el imageView pero no jala -----------------
+
+        //Mat imagef = new Mat (this.bitmap.getHeight(), this.bitmap.getWidth(), CvType.CV_8UC1);
+
+        //Mat imagef = Imgcodecs.imread(this.image.toString()); //Aca uso el imageView pero no jala -----------------
         //Mat imagef = Imgcodecs.imread(this.bitmap.toString());
         //Mat imagef = Imgcodecs.imread(this.path.getPath()); //Aca uso el path pero no jala -----------------
         //System.out.println("Imagen seleccionada: "+ this.path.getPath());
         //rearrange data into a long vertical strip (to float, reshape channels into columns)
-        imagef.convertTo(imagef, CvType.CV_32F);
+        //imagef.convertTo(imagef, CvType.CV_32F);
+
+        Mat imagef = new Mat();
+        Bitmap bmp32 = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+        Utils.bitmapToMat(bmp32, imagef);
+
+
         Mat data = imagef.reshape(1, (int) imagef.total());
         if (!imagef.empty()){
             Mat label = new Mat();

@@ -72,6 +72,7 @@ public class VisualizarFoto extends AppCompatActivity {
                 break;
             case R.id.btnSiguiente:
                 if(origen == TOMAR_FOTO) {
+                    Kmeans km = new Kmeans(this.imgRecibida);
                     Resultados.setImgRecibida(this.imgRecibida);
                 }
                 else if(origen == SELECCIONAR_FOTO){
@@ -83,7 +84,7 @@ public class VisualizarFoto extends AppCompatActivity {
                 cambiarVista = new Intent(VisualizarFoto.this, Resultados.class);
                 break;
         }
-        Kmeans km = new Kmeans(this.imgView); //Aca envio el imageView con la esperanza de que jale pero nop
+        //Kmeans km = new Kmeans(this.imgView); //Aca envio el imageView con la esperanza de que jale pero nop
         startActivity(cambiarVista);
     }
 }
