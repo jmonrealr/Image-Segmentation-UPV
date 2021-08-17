@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">segmentation</string>
+    <string name="btnFoto">Tomar foto</string>
+    <string name="btnCargar">Cargar imagen</string>
+    <string name="btnAtras">Regresar</string>
+    <string name="btnSiguiente">Continuar</string>
+    <string name="txtMensaje">
+        En esta aplicación podrás cargar una imagen, la cual sera segmentada usando el algoritmo de K-means clustering
+    </string>
+    <string name="txtTitulo">Segmentación de imagen</string>
+    <string name="txtPrevia">Vista previa de la imagen cargada</string>
+    <string name="txtResultados">Resultados</string>
+</resources>

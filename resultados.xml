@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+                                                   android:layout_height="match_parent">
+
+    <TextView
+            android:text="Entrada"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView4"
+            android:textSize="18sp" android:textColor="#2A2A2A"
+            tools:ignore="MissingConstraints" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginEnd="316dp"
+            android:layout_marginBottom="700dp"/>
+    <ImageView
+            android:layout_width="306dp"
+            android:layout_height="166dp" tools:srcCompat="@tools:sample/backgrounds/scenic"
+            android:id="@+id/imgInput"
+            tools:ignore="MissingConstraints" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginEnd="52dp"
+            android:layout_marginBottom="524dp"/>
+    <ImageView
+            android:layout_width="306dp"
+            android:layout_height="166dp" tools:srcCompat="@tools:sample/backgrounds/scenic"
+            android:id="@+id/imgGround"
+            tools:ignore="MissingConstraints" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="52dp" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="312dp"/>
+    <TextView
+            android:text="Ground truth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView5"
+            android:textSize="18sp" android:textColor="#2A2A2A"
+            tools:ignore="MissingConstraints" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginEnd="280dp"
+            android:layout_marginBottom="476dp"/>
+    <ImageView
+            android:layout_width="306dp"
+            android:layout_height="166dp" tools:srcCompat="@tools:sample/backgrounds/scenic"
+            android:id="@+id/imgPrediccion"
+            tools:ignore="MissingConstraints" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="52dp" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="84dp"/>
+    <TextView
+            android:text="Predicción"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView6"
+            android:textSize="18sp" android:textColor="#2A2A2A"
+            tools:ignore="MissingConstraints" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginEnd="300dp"
+            android:layout_marginBottom="256dp"/>
+    <Button
+            android:text="Guardar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/btnGuardar"
+            app:icon="@android:drawable/ic_menu_save"
+            tools:ignore="MissingConstraints" app:iconTint="#FFFFFF" android:gravity="center_horizontal|center_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="4dp" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="48dp"/>
+    <Button
+            android:id="@+id/btnAtras"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:icon="@android:drawable/ic_menu_revert"
+            android:textColor="#C14C4C4C" app:iconTint="#C14C4C4C" android:background="#00FFFFFF"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="144dp"
+            android:onClick="onClick" tools:text="Regresar" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="48dp" android:text="Regresar"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="@string/txtResultados"
+            android:ems="10"
+            android:id="@+id/editTextTextPersonName"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="-70dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
