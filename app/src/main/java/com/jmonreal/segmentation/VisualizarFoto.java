@@ -101,6 +101,9 @@ public class VisualizarFoto extends AppCompatActivity {
 
         Resultados.setResultado(bm);
 
+
+
+        //INTENTO 2
         /*Mat rgb = new Mat();
         Imgproc.cvtColor(resultado, rgb, Imgproc.COLOR_BGR2RGB);*/
 
@@ -115,6 +118,7 @@ public class VisualizarFoto extends AppCompatActivity {
         }*/
 
 
+        //INTENTO 3
         /*Mat tmp = new Mat (this.imgRecibida.getHeight(), this.imgRecibida.getWidth(), CvType.CV_8U, new Scalar(4));
         try {
             //Imgproc.cvtColor(seedsImage, tmp, Imgproc.COLOR_RGB2BGRA);
@@ -127,6 +131,7 @@ public class VisualizarFoto extends AppCompatActivity {
 
 
 
+        //INTENTO 4
         /*try {
             //Imgproc.cvtColor(seedsImage, tmp, Imgproc.COLOR_RGB2BGRA);
             //Imgproc.cvtColor(seedsImage, resultado, Imgproc.COLOR_GRAY2RGBA, 4);

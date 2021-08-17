@@ -16,7 +16,7 @@ import androidx.core.app.ActivityCompat;
 import ru.bartwell.exfilepicker.ExFilePicker;
 
 /**
- * Muestra la pantalla principal permitiendo tomar una fotografia o seleccionandola desde galeria
+ * Muestra la pantalla principal permitiendo tomar una fotografia o seleccionandola desde galeriaa
  */
 public class MainActivity extends AppCompatActivity {
 

@@ -81,7 +81,6 @@ public class Resultados extends AppCompatActivity {
                 break;
             case R.id.btnSiguiente:
                 //Aqui va el codigo para almacenar la imagen
-                //cambiarVista = new Intent(VisualizarFoto.this, Resultados.class);
                 break;
         }
     }
