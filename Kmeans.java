@@ -2,6 +2,7 @@ package com.jmonreal.segmentation;
 
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.ImageView;
@@ -82,9 +83,15 @@ public class Kmeans {
         //rearrange data into a long vertical strip (to float, reshape channels into columns)
         //imagef.convertTo(imagef, CvType.CV_32F);
 
-        Mat imagef = new Mat();
-        Bitmap bmp32 = bitmap.copy(Bitmap.Config.ARGB_8888, true);
-        Utils.bitmapToMat(bmp32, imagef);
+
+        this.image.invalidate();
+        BitmapDrawable drawable = (BitmapDrawable) this.image.getDrawable();
+        Bitmap btm = drawable.getBitmap();
+        Mat imagef = new Mat (btm.getHeight(), btm.getWidth(), CvType.CV_32F);
+
+        /*Mat imagef = new Mat();
+        Bitmap bmp32 = btm.copy(Bitmap.Config.ARGB_8888, true);
+        Utils.bitmapToMat(bmp32, imagef);*/
 
 
         Mat data = imagef.reshape(1, (int) imagef.total());
