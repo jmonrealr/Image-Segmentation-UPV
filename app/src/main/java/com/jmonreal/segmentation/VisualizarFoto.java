@@ -95,10 +95,16 @@ public class VisualizarFoto extends AppCompatActivity {
         Mat resultado = km.compute();
         //Convirtiendo a bitmap
         Bitmap bmp = null;
-        Mat rgb = new Mat();
-        Imgproc.cvtColor(resultado, rgb, Imgproc.COLOR_BGR2RGB);
 
-        try {
+        Bitmap bm = Bitmap.createBitmap(resultado.cols(), resultado.rows(),Bitmap.Config.ARGB_8888);
+        Utils.matToBitmap(resultado, bm);
+
+        Resultados.setResultado(bm);
+
+        /*Mat rgb = new Mat();
+        Imgproc.cvtColor(resultado, rgb, Imgproc.COLOR_BGR2RGB);*/
+
+        /*try {
             bmp = Bitmap.createBitmap(rgb.cols(), rgb.rows(), Bitmap.Config.ARGB_8888);
             Utils.matToBitmap(rgb, bmp);
             Resultados.setResultado(bmp);
@@ -106,7 +112,7 @@ public class VisualizarFoto extends AppCompatActivity {
         }
         catch (CvException e){
             Log.d("Exception",e.getMessage());
-        }
+        }*/
 
 
         /*Mat tmp = new Mat (this.imgRecibida.getHeight(), this.imgRecibida.getWidth(), CvType.CV_8U, new Scalar(4));

@@ -1,26 +1,19 @@
 package com.jmonreal.segmentation;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
-import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.core.app.ActivityCompat;
-import org.opencv.core.Mat;
-import org.opencv.imgcodecs.Imgcodecs;
 import ru.bartwell.exfilepicker.ExFilePicker;
-import ru.bartwell.exfilepicker.data.ExFilePickerResult;
 
 /**
  * Muestra la pantalla principal permitiendo tomar una fotografia o seleccionandola desde galeria
@@ -59,22 +52,6 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     public void seleccionarImg(View view){
-        /*ExFilePicker exFilePicker = new ExFilePicker();
-            exFilePicker.setCanChooseOnlyOneItem(true);
-            exFilePicker.setShowOnlyExtensions("jpg", "jpeg");
-            exFilePicker.setExceptExtensions("jpg");
-            exFilePicker.setNewFolderButtonDisabled(true);
-            exFilePicker.setSortButtonDisabled(true);
-            exFilePicker.setQuitButtonEnabled(true);
-            exFilePicker.setSortingType(ExFilePicker.SortingType.NAME_DESC);
-            exFilePicker.setUseFirstItemAsUpEnabled(true);
-            exFilePicker.setChoiceType(ExFilePicker.ChoiceType.FILES);
-            exFilePicker.setChoiceType(ExFilePicker.ChoiceType.DIRECTORIES);
-            exFilePicker.start(this, EX_FILE_PICKER_RESULT);*/
-
-
-        /*ExFilePicker exFilePicker = new ExFilePicker();
-        exFilePicker.start(this, EX_FILE_PICKER_RESULT);*/
 
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/");
@@ -105,22 +82,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(verFoto); // Inicia la siguiente actividad
 
         }
-        /*else if (requestCode == EX_FILE_PICKER_RESULT) {
-            ExFilePickerResult result = ExFilePickerResult.getFromIntent(data);
-            if (result != null && result.getCount() > 0) {
-            // Here is object contains selected files names and path
-            Log.i("folderLocation", result.getPath() + result.getNames().get(0));
-
-            Mat srcMat1 = Imgcodecs.imread(result.getPath() + result.getNames().get(0));
-            if (srcMat1.empty()) {
-                return;
-            }
-
-            System.out.println("=====Imagen seleccionada usando: "+srcMat1.toString());
-
-            }
-        }*/
-
 
         // <-- Comprobamos si la imagen fue tomada o selecccionada
     }
