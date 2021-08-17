@@ -12,6 +12,7 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.appcompat.widget.AppCompatCheckBox;
@@ -99,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else if (requestCode == SELECCIONAR_FOTO && resultCode == RESULT_OK) { // Si fue seleccionada
             Uri path = data.getData(); // ... obtiene el path de la imagen...
+            Toast.makeText(this, String.valueOf(path), Toast.LENGTH_LONG).show();
             VisualizarFoto.setImgSeleccionada(path); // ...y la carga en la siguiente actividad.
             startActivity(verFoto); // Inicia la siguiente actividad
 
