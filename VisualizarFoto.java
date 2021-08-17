@@ -5,10 +5,17 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import org.opencv.android.Utils;
+import org.opencv.core.CvException;
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
+import org.opencv.core.Scalar;
+import org.opencv.imgproc.Imgproc;
 
 /**
  * Muestra una vista previa de la imagen cargada
@@ -85,6 +92,45 @@ public class VisualizarFoto extends AppCompatActivity {
                 break;
         }
         Kmeans km = new Kmeans(this.imgView); //Aca envio el imageView con la esperanza de que jale pero nop
-        startActivity(cambiarVista);
+        Mat resultado = km.compute();
+        //Convirtiendo a bitmap
+
+        Bitmap bmp = null;
+        Mat rgb = new Mat();
+        Imgproc.cvtColor(resultado, rgb, Imgproc.COLOR_BGR2RGB);
+
+        try {
+            bmp = Bitmap.createBitmap(rgb.cols(), rgb.rows(), Bitmap.Config.ARGB_8888);
+            Utils.matToBitmap(rgb, bmp);
+            imgView.setImageBitmap(bmp);
+        }
+        catch (CvException e){
+            Log.d("Exception",e.getMessage());
+        }
+
+
+        /*Mat tmp = new Mat (this.imgRecibida.getHeight(), this.imgRecibida.getWidth(), CvType.CV_8U, new Scalar(4));
+        try {
+            //Imgproc.cvtColor(seedsImage, tmp, Imgproc.COLOR_RGB2BGRA);
+            Imgproc.cvtColor(resultado, tmp, Imgproc.COLOR_GRAY2RGBA, 3);
+            bmp = Bitmap.createBitmap(tmp.cols(), tmp.rows(), Bitmap.Config.ARGB_8888);
+            Utils.matToBitmap(tmp, bmp);
+            imgView.setImageBitmap(bmp);
+        }catch (CvException e){
+            Log.d("Exception",e.getMessage());}*/
+
+
+
+        /*try {
+            //Imgproc.cvtColor(seedsImage, tmp, Imgproc.COLOR_RGB2BGRA);
+            //Imgproc.cvtColor(seedsImage, resultado, Imgproc.COLOR_GRAY2RGBA, 4);
+            bmp = Bitmap.createBitmap(resultado.cols(), resultado.rows(), Bitmap.Config.ARGB_8888);
+            Utils.matToBitmap(resultado, bmp);
+            imgView.setImageBitmap(bmp);
+        }catch (CvException e){
+            Log.d("Exception",e.getMessage());}*/
+
+
+        //startActivity(cambiarVista);
     }
 }

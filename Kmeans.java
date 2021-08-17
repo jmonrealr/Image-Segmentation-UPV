@@ -31,6 +31,7 @@ public class Kmeans {
     private Bitmap bitmap;
     private static Uri path;
     private int K = 5 ;
+    Mat draw;
 
     /**
      * Constructor initialize all properties
@@ -47,7 +48,6 @@ public class Kmeans {
     public Kmeans(ImageView image) {
         this();
         this.image = image;
-        compute();
     }
 
     /**
@@ -70,9 +70,10 @@ public class Kmeans {
     /**
      * Start the Image Segmentation using K-means clustering
      */
-    void compute(){
+    Mat compute(){
         System.out.println(System.getProperty("user.dir"));
-        String directory = System.getProperty("user.dir");
+        //String directory = System.getProperty("user.dir");
+        String directory = "/storage/emulated/C81B-9CFA/";
 
         //Mat imagef = new Mat (this.bitmap.getHeight(), this.bitmap.getWidth(), CvType.CV_8UC1);
 
@@ -102,22 +103,24 @@ public class Kmeans {
             int flags = Core.KMEANS_PP_CENTERS;
             Mat centers = new Mat();
             double compactness = Core.kmeans(data, this.K, label, criteria, attempts, flags, centers);
-            Mat draw = new Mat( (int) imagef.total(), 1, CvType.CV_32FC3);
-            Mat colors = centers.reshape(3, this.K);
+            /*Mat*/ draw = new Mat( (int) imagef.total(), 1, CvType.CV_32FC3);
+            //Mat colors = centers.reshape(3, this.K);
             for (int i = 0; i < K; i++) {
                 Mat mask = new Mat(); // mas for each cluster label
                 Core.compare(label, new Scalar(i), mask, Core.CMP_EQ);
-                Mat col = colors.row(i);
-                double d[] = col.get(0, 0);
-                draw.setTo(new Scalar(d[0], d[1], d[2]), mask);
+                //Mat col = colors.row(i);
+                //double d[] = col.get(0, 0);
+                //draw.setTo(new Scalar(d[0], d[1], d[2]), mask);
 
             }
             draw = draw.reshape(3, imagef.rows());
             draw.convertTo(draw, CvType.CV_8U);
             Imgcodecs.imwrite(directory + "final" + ".jpg", draw);
+            System.out.println("======Salida: "+directory + "final" + ".jpg");
         }else {
             throw new NullPointerException("IMAGE IS EMPTY!");
         }
+        return draw;
     }
 
 }
