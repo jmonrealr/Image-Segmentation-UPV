@@ -80,9 +80,11 @@ public class VisualizarFoto extends AppCompatActivity {
             case R.id.btnSiguiente:
                 if(origen == TOMAR_FOTO) {
                     //Kmeans km = new Kmeans(this.imgRecibida);
+                    Resultados.setTomarFoto();
                     Resultados.setImgRecibida(this.imgRecibida);
                 }
                 else if(origen == SELECCIONAR_FOTO){
+                    Resultados.setSeleccionarFoto();
                     Resultados.setImgSeleccionada(this.path);
                     //Kmeans km = new Kmeans(this.path); //Aca envio el path con la esperanza de que jale pero nop
 
@@ -95,11 +97,10 @@ public class VisualizarFoto extends AppCompatActivity {
         Mat resultado = km.compute();
         //Convirtiendo a bitmap
         Bitmap bmp = null;
-        System.out.println("resultado " + resultado);
-        Bitmap bm = Bitmap.createBitmap(resultado.cols(), resultado.rows(),Bitmap.Config.RGB_565);
+
+        Bitmap bm = Bitmap.createBitmap(resultado.cols(), resultado.rows(),Bitmap.Config.ARGB_8888);
         Utils.matToBitmap(resultado, bm);
-        System.out.println("bitmap " + bm);
-        System.out.println("get something" + bm.getColorSpace());
+
         Resultados.setResultado(bm);
 
 
@@ -145,4 +146,5 @@ public class VisualizarFoto extends AppCompatActivity {
 
         startActivity(cambiarVista);
     }
+
 }

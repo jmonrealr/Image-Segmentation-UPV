@@ -2,4 +2,5 @@
 <resources>
     <item name="btnSiguiente" type="id"/>
     <item name="btnAtras" type="id" />
+    <item name="btnGuardar" type="id"/>
 </resources>
