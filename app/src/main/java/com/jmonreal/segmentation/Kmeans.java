@@ -110,14 +110,14 @@ public class Kmeans {
             Mat centers = new Mat();
             double compactness = Core.kmeans(data, this.K, label, criteria, attempts, flags, centers);
             /*Mat*/ draw = new Mat( (int) imagef.total(), 1, CvType.CV_32FC3);
-            //Mat colors = centers.reshape(3, K);
+            Mat colors = centers.reshape(4, K);
             System.out.println(centers.toString());
             for (int i = 0; i < K; i++) {
                 Mat mask = new Mat(); // mas for each cluster label
                 Core.compare(label, new Scalar(i), mask, Core.CMP_EQ);
-                //Mat col = colors.row(i);
-                //double d[] = col.get(0, 0);
-                //draw.setTo(new Scalar(d[0], d[1], d[2]), mask);
+                Mat col = colors.row(i);
+                double d[] = col.get(0, 0);
+                draw.setTo(new Scalar(d[0], d[1], d[2]), mask);
                 Mat draw2 = draw;
                 draw2 = draw.reshape(3, imagef.rows());
                 draw2.convertTo(draw2, CvType.CV_8UC3);
