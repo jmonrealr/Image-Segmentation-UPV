@@ -1,7 +1,11 @@
 package com.jmonreal.segmentation;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -10,6 +14,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -74,7 +79,8 @@ public class Resultados extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
 
-
+        ActivityCompat.requestPermissions(Resultados.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+        ActivityCompat.requestPermissions(Resultados.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resultados);
@@ -107,16 +113,20 @@ public class Resultados extends AppCompatActivity {
                 startActivity(cambiarVista);
                 break;
             case R.id.btnGuardar:
+
                 imgPrediccion.setImageBitmap(imgRecibida);
                 imgPrediccion.refreshDrawableState();
-                grabar();
+                saveToGallery(resultado);
+                //grabar();
+
+                //saveToInternalStorage(resultado);
                 break;
         }
     }
 
 
 
-    public void grabar() throws IOException {
+/*    public void grabar() throws IOException {
         File filepath = Environment.getExternalStorageDirectory();
         File dir = new File(filepath.getAbsolutePath());
         System.out.println("ruta: "+filepath.getAbsolutePath());
@@ -132,32 +142,59 @@ public class Resultados extends AppCompatActivity {
         this.imgRecibida.compress(Bitmap.CompressFormat.JPEG, 100, outStream);
         outStream.flush();
         outStream.close();
+    }*/
 
+    private String saveToInternalStorage(Bitmap bitmapImage){
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
 
-// Write to SD Card
-        /*try {
-            File sdCard = Environment.getExternalStorageDirectory();
-            File dir = new File(sdCard.getAbsolutePath() + "/KMeans");
-            dir.mkdirs();
+        // Create imageDir
+        File mypath=new File(directory,System.currentTimeMillis()+".jpg");
 
-            System.out.println("ruta: "+sdCard.getAbsolutePath());
-            String fileName = String.format("%d.jpg", System.currentTimeMillis());
-            File outFile = new File(dir, fileName);
-
-            outStream = new FileOutputStream(outFile);
-            this.resultado.compress(Bitmap.CompressFormat.JPEG, 100, outStream);
-            outStream.flush();
-            outStream.close();
-
-            Log.d(TAG, "onPictureTaken - wrote to " + outFile.getAbsolutePath());
-
-        } catch (FileNotFoundException e) {
-            System.out.println("FNF");
-            e.printStackTrace();
-        } catch (IOException e) {
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            System.out.println("GUARDADO: " +mypath);
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return directory.getAbsolutePath();
+    }
 
-        }*/
+
+    private void saveToGallery(Bitmap bitmapImage){
+
+        FileOutputStream outputStream = null;
+        File file = Environment.getExternalStorageDirectory();
+        File dir = new File(file.getAbsolutePath());
+
+        String filename = String.format("%d.png",System.currentTimeMillis());
+        File outFile = new File(dir,filename);
+        try{
+            outputStream = new FileOutputStream(outFile);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        bitmapImage.compress(Bitmap.CompressFormat.PNG,100,outputStream);
+        try{
+            outputStream.flush();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        try{
+            outputStream.close();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
