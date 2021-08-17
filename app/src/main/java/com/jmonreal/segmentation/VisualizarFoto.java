@@ -11,7 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
- * Muesta una vista previa de la imagen cargada
+ * Muestra una vista previa de la imagen cargada
  */
 public class VisualizarFoto extends AppCompatActivity {
 
@@ -76,10 +76,14 @@ public class VisualizarFoto extends AppCompatActivity {
                 }
                 else if(origen == SELECCIONAR_FOTO){
                     Resultados.setImgSeleccionada(this.path);
+                    //Kmeans km = new Kmeans(this.path); //Aca envio el path con la esperanza de que jale pero nop
+
+
                 }
                 cambiarVista = new Intent(VisualizarFoto.this, Resultados.class);
                 break;
         }
+        Kmeans km = new Kmeans(this.imgView); //Aca envio el imageView con la esperanza de que jale pero nop
         startActivity(cambiarVista);
     }
 }

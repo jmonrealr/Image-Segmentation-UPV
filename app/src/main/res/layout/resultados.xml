@@ -68,4 +68,13 @@
             android:layout_marginEnd="144dp"
             android:onClick="onClick" tools:text="Regresar" app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="48dp" android:text="Regresar"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="@string/txtResultados"
+            android:ems="10"
+            android:id="@+id/editTextTextPersonName"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="-70dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

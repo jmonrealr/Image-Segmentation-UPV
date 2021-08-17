@@ -8,4 +8,6 @@
         En esta aplicación podrás cargar una imagen, la cual sera segmentada usando el algoritmo de K-means clustering
     </string>
     <string name="txtTitulo">Segmentación de imagen</string>
+    <string name="txtPrevia">Vista previa de la imagen cargada</string>
+    <string name="txtResultados">Resultados</string>
 </resources>
