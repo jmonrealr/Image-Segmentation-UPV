@@ -1,25 +1,38 @@
 package com.jmonreal.segmentation;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.core.app.ActivityCompat;
+import ru.bartwell.exfilepicker.ExFilePicker;
 
 /**
- * Muestra la pantalla principal permitiendo tomar una fotografia o seleccionandola desde galeria
+ * Muestra la pantalla principal permitiendo tomar una fotografia o seleccionandola desde galeriaa
  */
 public class MainActivity extends AppCompatActivity {
 
     private final int TOMAR_FOTO = 1;
     private final int SELECCIONAR_FOTO = 200;
+    private static final int EX_FILE_PICKER_RESULT = 0;
+    private static final int READ_STORAGE_PERMISSION_REQUEST_CODE = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (!checkPermissionForReadExtertalStorage()) {
+            requestPermissionForReadExtertalStorage();
+        }
     }
 
     /**
@@ -39,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     public void seleccionarImg(View view){
+
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/");
         startActivityForResult(intent.createChooser(intent, "Selecciona una imagen"), SELECCIONAR_FOTO);
@@ -59,13 +73,47 @@ public class MainActivity extends AppCompatActivity {
             Bundle extras = data.getExtras();
             Bitmap imgBitmap = (Bitmap) extras.get("data"); // ... la almacena en un Bitmap ...
             VisualizarFoto.setImgRecibida(imgBitmap); // ...y la carga en la siguiente actividad.
+            startActivity(verFoto); // Inicia la siguiente actividad
         }
         else if (requestCode == SELECCIONAR_FOTO && resultCode == RESULT_OK) { // Si fue seleccionada
             Uri path = data.getData(); // ... obtiene el path de la imagen...
+            Toast.makeText(this, String.valueOf(path), Toast.LENGTH_LONG).show();
             VisualizarFoto.setImgSeleccionada(path); // ...y la carga en la siguiente actividad.
-        }
-        // <-- Comprobamos si la imagen fue tomada o selecccionada
+            startActivity(verFoto); // Inicia la siguiente actividad
 
-        startActivity(verFoto); // Inicia la siguiente actividad
+        }
+
+        // <-- Comprobamos si la imagen fue tomada o selecccionada
+    }
+
+    public boolean checkPermissionForReadExtertalStorage() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            int result = getApplicationContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE);
+            return result == PackageManager.PERMISSION_GRANTED;
+        }
+        return false;
+    }
+
+    public void requestPermissionForReadExtertalStorage() {
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                READ_STORAGE_PERMISSION_REQUEST_CODE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case READ_STORAGE_PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.e("value", "Permission Granted, Now you can use local drive .");
+
+                    ExFilePicker exFilePicker = new ExFilePicker();
+                    exFilePicker.start(this, EX_FILE_PICKER_RESULT);
+                } else {
+                    Log.e("value", "Permission Denied, You cannot use local drive .");
+                    requestPermissionForReadExtertalStorage();
+                }
+                break;
+        }
     }
 }

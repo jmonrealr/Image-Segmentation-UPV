@@ -43,5 +43,6 @@
             android:textSize="24sp" android:textColor="#2E2D2D"
             tools:ignore="MissingConstraints" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="31dp" app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="43dp" tools:text="Imagen cargada"/>
+            android:layout_marginTop="63dp" tools:text="Vista previa de Imagen cargada"
+            android:text="@string/txtPrevia"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

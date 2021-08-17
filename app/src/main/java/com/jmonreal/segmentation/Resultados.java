@@ -14,8 +14,10 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Resultados extends AppCompatActivity {
 
     private ImageView imgInput;
+    private ImageView imgPrediccion;
     private static Uri path;
     private static Bitmap imgRecibida = null;
+    private static Bitmap resultado = null;
 
     /**
      * Almacena la fotografia en esta actividad
@@ -24,6 +26,15 @@ public class Resultados extends AppCompatActivity {
     public static void setImgRecibida(Bitmap img){
         imgRecibida = img;
     }
+
+    /**
+     * Almacena la fotografia en esta actividad
+     * @param img Fotografia
+     */
+    public static void setResultado(Bitmap img){
+        resultado = img;
+    }
+
 
     /**
      * Almacena la ruta de la imagen en esta actividad
@@ -50,6 +61,8 @@ public class Resultados extends AppCompatActivity {
         else{
             imgInput.setImageURI(path);
         }
+        imgPrediccion = findViewById(R.id.imgPrediccion);
+        imgPrediccion.setImageBitmap(resultado);
     }
 
     /**
@@ -68,7 +81,6 @@ public class Resultados extends AppCompatActivity {
                 break;
             case R.id.btnSiguiente:
                 //Aqui va el codigo para almacenar la imagen
-                //cambiarVista = new Intent(VisualizarFoto.this, Resultados.class);
                 break;
         }
     }
