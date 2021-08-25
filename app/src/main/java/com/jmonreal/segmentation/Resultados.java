@@ -46,16 +46,16 @@ public class Resultados extends AppCompatActivity {
         TOMAR_FOTO = 0;
     }
     /**
-     * Almacena la fotografia en esta actividad
-     * @param img Fotografia
+     * Store the picture in this activity
+     * @param img picture
      */
     public static void setImgRecibida(Bitmap img){
         imgRecibida = img;
     }
 
     /**
-     * Almacena la fotografia en esta actividad
-     * @param img Fotografia
+     * Store the picture in this activity
+     * @param img picture
      */
     public static void setResultado(Bitmap img){
         resultado = img;
@@ -63,25 +63,23 @@ public class Resultados extends AppCompatActivity {
 
 
     /**
-     * Almacena la ruta de la imagen en esta actividad
-     * @param p Path de imagen
+     * Stores the image path in this activity
+     * @param p Image path
      */
     public static void setImgSeleccionada(Uri p){
         path = p;
     }
 
     /**
-     * Carga la imagen/fotografia en un ImageView
-     * Carga la imagen preprocesada en un ImageView
-     * Carga la imagen segmentada por KMeans en un ImageView
-     * @param savedInstanceState
+     * Load image/photograph into an ImageView
+     * Loads the preprocessed image into an ImageView
+     * Load the image segmented by KMeans into an ImageView
+     * @param savedInstanceState Bundle savedInstanceState
      */
     @Override
     protected void onCreate(Bundle savedInstanceState){
-
         ActivityCompat.requestPermissions(Resultados.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
         ActivityCompat.requestPermissions(Resultados.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resultados);
         imgInput = findViewById(R.id.imgInput);
@@ -98,38 +96,31 @@ public class Resultados extends AppCompatActivity {
     }
 
     /**
-     * Permite almacenar la imagen segmentada y volver al inicio de la aplicación
-     * @param view
+     * Allows you to store the segmented image and return to the start of the application.
+     * @param view view
      */
     public void onClick(View view) throws IOException {
         Intent cambiarVista = null;
-
-        System.out.println("ID: "+view.getId());
-
         switch (view.getId()){
             case R.id.btnAtras:
-                System.out.println("Clickkkk salirrr");
                 cambiarVista = new Intent(Resultados.this, MainActivity.class);
                 startActivity(cambiarVista);
                 break;
             case R.id.btnGuardar:
-
-                /*imgPrediccion.setImageBitmap(imgRecibida);
-                imgPrediccion.refreshDrawableState();*/
                 saveToGallery(resultado);
-
                 break;
         }
     }
 
+    /**
+     * Saves the image on the storage as .png
+     * @param bmp Bitmap of the image
+     */
     private void saveToGallery(Bitmap bmp){
-
         Bitmap bitmapImage = bmp.copy(bmp.getConfig(), true);
-
         FileOutputStream outputStream = null;
         File file = Environment.getExternalStorageDirectory();
         File dir = new File(file.getAbsolutePath());
-
         String filename = String.format("%d.png",System.currentTimeMillis());
         File outFile = new File(dir,filename);
         try{

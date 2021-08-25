@@ -16,7 +16,7 @@ import androidx.core.app.ActivityCompat;
 import ru.bartwell.exfilepicker.ExFilePicker;
 
 /**
- * Muestra la pantalla principal permitiendo tomar una fotografia o seleccionandola desde galeriaa
+ * Displays the main screen allowing you to take a picture or select it from the gallery.
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -36,11 +36,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Prepara la camara para capturar una fotografia
-     * @param view
+     * Prepare the camera to take a picture
+     * @param view view
      */
     public void tomarFoto(View view){
-        // -->Abrimos la camara
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if(intent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(intent, TOMAR_FOTO);
@@ -48,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Inicia el selector de imagenes para cargar una en la aplicación
-     * @param view
+     * Start the image selector to load an image into the application.
+     * @param view view
      */
     public void seleccionarImg(View view){
 
@@ -59,10 +58,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Envia la imagen capturada o seleccionada a la sguiente vista
-     * @param requestCode
-     * @param resultCode
-     * @param data Respuesta del Intent
+     * Sends the captured or selected image to the following view
+     * @param requestCode request type
+     * @param resultCode result type
+     * @param data response after intent
      */
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -82,10 +81,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(verFoto); // Inicia la siguiente actividad
 
         }
-
         // <-- Comprobamos si la imagen fue tomada o selecccionada
     }
 
+    /**
+     *  Check if has permission for read external storage
+     * @return Permission for Read External Storage
+     */
     public boolean checkPermissionForReadExtertalStorage() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             int result = getApplicationContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE);
@@ -94,6 +96,9 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
+    /**
+     * Request permission for read external Storage
+     */
     public void requestPermissionForReadExtertalStorage() {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                 READ_STORAGE_PERMISSION_REQUEST_CODE);

@@ -18,7 +18,7 @@ import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
 /**
- * Muestra una vista previa de la imagen cargada
+ * Displays a preview of the loaded image
  */
 public class VisualizarFoto extends AppCompatActivity {
 
@@ -30,8 +30,8 @@ public class VisualizarFoto extends AppCompatActivity {
     public static Bitmap imgRecibida = null;
 
     /**
-     * Almacena la fotografia en esta actividad
-     * @param img Fotografia
+     * Store the picture in this activity
+     * @param img Bitmap of the picture
      */
     public static void setImgRecibida(Bitmap img){
         imgRecibida = img;
@@ -39,8 +39,8 @@ public class VisualizarFoto extends AppCompatActivity {
     }
 
     /**
-     * Almacena la ruta de la imagen en esta actividad
-     * @param p Path de imagen
+     * Stores the image path in this activity
+     * @param p path of picture
      */
     public static void setImgSeleccionada(Uri p){
         path = p;
@@ -48,7 +48,7 @@ public class VisualizarFoto extends AppCompatActivity {
     }
 
     /**
-     * Carga la imagen/fotografia en un ImageView
+     * Load the picture into an ImageView
      * @param savedInstanceState
      */
     @Override
@@ -65,85 +65,37 @@ public class VisualizarFoto extends AppCompatActivity {
     }
 
     /**
-     * Permite continuar con el flujo de la aplicación o volver para seleccionar otra imagen
-     * @param view
+     * Allows you to continue with the application flow or return to select another image.
+     * @param view viewOnClick
      */
     public void onClick(View view){
         Intent cambiarVista = null;
-
-        System.out.println(view.getId());
-
         switch (view.getId()){
             case R.id.btnAtras:
                 cambiarVista = new Intent(VisualizarFoto.this, MainActivity.class);
                 break;
             case R.id.btnSiguiente:
                 if(origen == TOMAR_FOTO) {
-                    //Kmeans km = new Kmeans(this.imgRecibida);
                     Resultados.setTomarFoto();
                     Resultados.setImgRecibida(this.imgRecibida);
                 }
                 else if(origen == SELECCIONAR_FOTO){
                     Resultados.setSeleccionarFoto();
                     Resultados.setImgSeleccionada(this.path);
-                    //Kmeans km = new Kmeans(this.path); //Aca envio el path con la esperanza de que jale pero nop
-
-
                 }
                 cambiarVista = new Intent(VisualizarFoto.this, Resultados.class);
                 break;
         }
-        Kmeans km = new Kmeans(this.imgView); //Aca envio el imageView con la esperanza de que jale pero nop
+
+        Kmeans km = new Kmeans(this.imgView);
         Mat resultado = km.compute();
+
         //Convirtiendo a bitmap
         Bitmap bmp = null;
-
         Bitmap bm = Bitmap.createBitmap(resultado.cols(), resultado.rows(),Bitmap.Config.ARGB_8888);
         Utils.matToBitmap(resultado, bm);
 
         Resultados.setResultado(bm);
-
-
-
-        //INTENTO 2
-        /*Mat rgb = new Mat();
-        Imgproc.cvtColor(resultado, rgb, Imgproc.COLOR_BGR2RGB);*/
-
-        /*try {
-            bmp = Bitmap.createBitmap(rgb.cols(), rgb.rows(), Bitmap.Config.ARGB_8888);
-            Utils.matToBitmap(rgb, bmp);
-            Resultados.setResultado(bmp);
-            //imgView.setImageBitmap(bmp);
-        }
-        catch (CvException e){
-            Log.d("Exception",e.getMessage());
-        }*/
-
-
-        //INTENTO 3
-        /*Mat tmp = new Mat (this.imgRecibida.getHeight(), this.imgRecibida.getWidth(), CvType.CV_8U, new Scalar(4));
-        try {
-            //Imgproc.cvtColor(seedsImage, tmp, Imgproc.COLOR_RGB2BGRA);
-            Imgproc.cvtColor(resultado, tmp, Imgproc.COLOR_GRAY2RGBA, 3);
-            bmp = Bitmap.createBitmap(tmp.cols(), tmp.rows(), Bitmap.Config.ARGB_8888);
-            Utils.matToBitmap(tmp, bmp);
-            imgView.setImageBitmap(bmp);
-        }catch (CvException e){
-            Log.d("Exception",e.getMessage());}*/
-
-
-
-        //INTENTO 4
-        /*try {
-            //Imgproc.cvtColor(seedsImage, tmp, Imgproc.COLOR_RGB2BGRA);
-            //Imgproc.cvtColor(seedsImage, resultado, Imgproc.COLOR_GRAY2RGBA, 4);
-            bmp = Bitmap.createBitmap(resultado.cols(), resultado.rows(), Bitmap.Config.ARGB_8888);
-            Utils.matToBitmap(resultado, bmp);
-            imgView.setImageBitmap(bmp);
-        }catch (CvException e){
-            Log.d("Exception",e.getMessage());}*/
-
-
         startActivity(cambiarVista);
     }
 

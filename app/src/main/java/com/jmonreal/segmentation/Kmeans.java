@@ -71,39 +71,17 @@ public class Kmeans {
      * Start the Image Segmentation using K-means clustering
      */
     Mat compute(){
-        System.out.println(System.getProperty("user.dir"));
-        //String directory = System.getProperty("user.dir");
         String directory = "/storage/emulated/C81B-9CFA/";
-
-        //Mat imagef = new Mat (this.bitmap.getHeight(), this.bitmap.getWidth(), CvType.CV_8UC1);
-
-        //Mat imagef = Imgcodecs.imread(this.image.toString()); //Aca uso el imageView pero no jala
-        //Mat imagef = Imgcodecs.imread(this.bitmap.toString());
-        //Mat imagef = Imgcodecs.imread(this.path.getPath()); //Aca uso el path pero no jala
-        //System.out.println("Imagen seleccionada: "+ this.path.getPath());
-        //rearrange data into a long vertical strip (to float, reshape channels into columns)
-        //imagef.convertTo(imagef, CvType.CV_32F);
-
-
-        /*this.image.invalidate();
-        BitmapDrawable drawable = (BitmapDrawable) this.image.getDrawable();
-        Bitmap btm = drawable.getBitmap();
-        Mat imagef = new Mat (btm.getHeight(),  btm.getWidth(), CvType.CV_8UC3);*/
-
         BitmapDrawable drawable = (BitmapDrawable) this.image.getDrawable();
         Bitmap btm = drawable.getBitmap();
 
         Mat imagef = new Mat();
         Bitmap bmp32 = btm.copy(Bitmap.Config.ARGB_8888, true);
         Utils.bitmapToMat(bmp32, imagef);
-
-        System.out.println(  "image base"+ imagef);
         imagef.convertTo(imagef, CvType.CV_32F);
         Mat data = imagef.reshape(1, (int) imagef.total());
-        System.out.println(data);
         if (!imagef.empty()){
             Mat label = new Mat();
-            //TermCriteria criteria = new TermCriteria();
             TermCriteria criteria = new TermCriteria(TermCriteria.EPS + TermCriteria.MAX_ITER, 50, 0.2);
             int attempts = 5;
             int flags = Core.KMEANS_PP_CENTERS;
@@ -113,20 +91,15 @@ public class Kmeans {
             Mat colors = centers.reshape(4, K);
             System.out.println(centers.toString());
             for (int i = 0; i < K; i++) {
-                Mat mask = new Mat(); // mas for each cluster label
+                Mat mask = new Mat(); // mask for each cluster label
                 Core.compare(label, new Scalar(i), mask, Core.CMP_EQ);
                 Mat col = colors.row(i);
                 double d[] = col.get(0, 0);
                 draw.setTo(new Scalar(d[0], d[1], d[2]), mask);
-                Mat draw2 = draw;
-                draw2 = draw.reshape(3, imagef.rows());
-                draw2.convertTo(draw2, CvType.CV_8UC3);
-                Imgcodecs.imwrite(directory + "testing_" + i + ".jpg", draw2);
             }
             draw = draw.reshape(3, imagef.rows());
             draw.convertTo(draw, CvType.CV_8U);
             Imgcodecs.imwrite(directory + "final" + ".jpg", draw);
-            System.out.println("======Salida: "+directory + "final" + ".jpg");
         }else {
             throw new NullPointerException("IMAGE IS EMPTY!");
         }
